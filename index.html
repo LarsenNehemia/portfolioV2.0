@@ -1,10 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Larsen.N Portfolio</title>
-    <link rel="icon" sizes="32x32" href="img/favicon.png" />
     <link href="style.css" rel="stylesheet" />
     <link
       rel="stylesheet"
@@ -18,21 +17,146 @@
   <body>
     <div id="scrollBar"></div>
 
+    <!-- ===== NAVBAR ===== -->
     <header>
       <nav class="navbar">
         <div class="logo">Larsen<span>.N</span></div>
-        <ul class="nav-links">
-          <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#services" class="nav-link">Interest</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
+
+        <!-- Desktop nav links -->
+        <ul class="nav-links" id="navLinks">
+          <li>
+            <a href="#home" class="nav-link" data-en="Home" data-pt="Início"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a href="#about" class="nav-link" data-en="About" data-pt="Sobre"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#skills"
+              class="nav-link"
+              data-en="Skills"
+              data-pt="Habilidades"
+              >Skills</a
+            >
+          </li>
+          <li>
+            <a
+              href="#services"
+              class="nav-link"
+              data-en="Interest"
+              data-pt="Interesses"
+              >Interest</a
+            >
+          </li>
+          <li>
+            <a
+              href="#projects"
+              class="nav-link"
+              data-en="Projects"
+              data-pt="Projetos"
+              >Projects</a
+            >
+          </li>
+          <li>
+            <a
+              href="#contact"
+              class="nav-link"
+              data-en="Contact"
+              data-pt="Contato"
+              >Contact</a
+            >
+          </li>
         </ul>
+
+        <!-- Right controls -->
+        <div class="nav-controls">
+          <!-- Language Toggle -->
+          <button
+            class="ctrl-btn lang-btn"
+            id="langToggle"
+            aria-label="Switch language"
+          >
+            <span id="langLabel">PT</span>
+          </button>
+          <!-- Theme Toggle -->
+          <button
+            class="ctrl-btn theme-btn"
+            id="themeToggle"
+            aria-label="Toggle light/dark mode"
+          >
+            <i class="fa-solid fa-sun" id="iconSun"></i>
+            <i class="fa-solid fa-moon" id="iconMoon"></i>
+          </button>
+          <!-- Hamburger -->
+          <button
+            class="hamburger"
+            id="hamburger"
+            aria-label="Open menu"
+            aria-expanded="false"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
       </nav>
+
+      <!-- Mobile Menu Drawer -->
+      <div class="mobile-menu" id="mobileMenu">
+        <ul>
+          <li>
+            <a href="#home" class="mob-link" data-en="Home" data-pt="Início"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a href="#about" class="mob-link" data-en="About" data-pt="Sobre"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#skills"
+              class="mob-link"
+              data-en="Skills"
+              data-pt="Habilidades"
+              >Skills</a
+            >
+          </li>
+          <li>
+            <a
+              href="#services"
+              class="mob-link"
+              data-en="Interest"
+              data-pt="Interesses"
+              >Interest</a
+            >
+          </li>
+          <li>
+            <a
+              href="#projects"
+              class="mob-link"
+              data-en="Projects"
+              data-pt="Projetos"
+              >Projects</a
+            >
+          </li>
+          <li>
+            <a
+              href="#contact"
+              class="mob-link"
+              data-en="Contact"
+              data-pt="Contato"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
     </header>
 
-    <!-- HERO -->
+    <!-- ===== HERO ===== -->
     <section class="hero" id="home">
       <div class="hero-bg-slider">
         <div
@@ -62,26 +186,42 @@
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <p class="hero-greeting">Welcome to my portfolio</p>
+        <p
+          class="hero-greeting"
+          data-en="Welcome to my portfolio"
+          data-pt="Bem-vindo ao meu portfólio"
+        >
+          Welcome to my portfolio
+        </p>
         <h1>Hi, I'm <span>Larsen Nehemia</span></h1>
         <div class="hero-subtitle-wrapper">
           <h2 class="hero-subtitle">
             <span id="typing"></span><span class="cursor">|</span>
           </h2>
         </div>
-        <p class="hero-desc">
+        <p
+          class="hero-desc"
+          data-en="I design and build modern, responsive websites and web applications. Passionate about creating engaging user experiences and helping businesses grow."
+          data-pt="Eu projeto e construo websites modernos e aplicações web responsivas. Apaixonado por criar experiências envolventes e ajudar empresas a crescer."
+        >
           I design and build modern, responsive websites and web applications.
           Passionate about creating engaging user experiences and helping
           businesses grow.
         </p>
-        <a href="#projects" class="btn">View My Work</a>
+        <a
+          href="#projects"
+          class="btn"
+          data-en="View My Work"
+          data-pt="Ver Meu Trabalho"
+          >View My Work</a
+        >
       </div>
       <button class="arrow-down" id="arrowBtn" aria-label="Go to About section">
         <i class="fa-solid fa-angle-down"></i>
       </button>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ===== ABOUT ===== -->
     <section class="about-section" id="about">
       <div class="about-container">
         <div class="about-image">
@@ -89,107 +229,193 @@
           <div class="about-img-accent"></div>
         </div>
         <div class="about-text">
-          <span class="section-label">Who I Am</span>
-          <h2>About Me &amp; My Experience</h2>
-          <p>
+          <span class="section-label" data-en="Who I Am" data-pt="Quem Sou Eu"
+            >Who I Am</span
+          >
+          <h2
+            data-en="About Me &amp; My Experience"
+            data-pt="Sobre Mim &amp; Minha Experiência"
+          >
+            About Me &amp; My Experience
+          </h2>
+          <p
+            data-en="Currently I am a freelance web developer building my skills to create web pages, web apps and websites for all kinds of customers that would like to grow their business. I strive to help promote small businesses as well as helping other creators come up with their own business website."
+            data-pt="Atualmente sou um desenvolvedor web freelancer aprimorando minhas habilidades para criar páginas web, aplicativos e websites para todo tipo de cliente que deseja expandir o negócio. Me esforço para ajudar a promover pequenas empresas e criadores que querem seu próprio site."
+          >
             Currently I am a freelance web developer building my skills to
             create web pages, web apps and websites for all kinds of customers
             that would like to grow their business. I strive to help promote
             small businesses as well as helping other creators come up with
             their own business website.
           </p>
-          <p>
-            I'm a recent graduate from IIE MSA in South Africa where i studied a
-            bachelor's degree in Computer &amp; Information Science and
-            completed a Higher Certificate in Business Practice and Principles
-            at the same University. I have honed my skills through the
-            university's program as well as self-teaching and creating few small
-            projects.
+          <p
+            data-en="I have graduated from a bachelor's degree in Computer &amp; Information Science from the University of IIE MSA and completed a Higher Certificate in Business Practice and Principles at the same University. I have honed my skills through the university's program as well as self-teaching and completing several online certificates on Udemy."
+            data-pt="Graduei-me em Ciências da Computação e Informação pela Universidade IIE MSA e concluí um Certificado Superior em Práticas e Princípios de Negócios na mesma universidade. Aprimorei minhas habilidades por meio do programa universitário, autodidatismo e certificados online na Udemy."
+          >
+            I have graduated from a bachelor's degree in Computer &amp;
+            Information Science from the University of IIE MSA and completed a
+            Higher Certificate in Business Practice and Principles at the same
+            University. I have honed my skills through the university's program
+            as well as self-teaching and completing several online certificates
+            on Udemy.
           </p>
-          <h3>Experience Highlights</h3>
+
+          <h3
+            data-en="Experience Highlights"
+            data-pt="Destaques de Experiência"
+          >
+            Experience Highlights
+          </h3>
           <ul class="about-list">
             <li>
-              <i class="fa-solid fa-check"></i> Built full-stack projects
-              integrating PHP and MySQL.
+              <i class="fa-solid fa-check"></i>
+              <span
+                data-en="Developed multiple responsive websites for clients using HTML, CSS, and JavaScript."
+                data-pt="Desenvolvi vários websites responsivos para clientes usando HTML, CSS e JavaScript."
+                >Developed multiple responsive websites for clients using HTML,
+                CSS, and JavaScript.</span
+              >
             </li>
             <li>
-              <i class="fa-solid fa-check"></i> Worked on dynamic front-end
-              interfaces using React and API integrations.
+              <i class="fa-solid fa-check"></i>
+              <span
+                data-en="Built full-stack projects integrating PHP and MySQL."
+                data-pt="Construí projetos full-stack integrando PHP e MySQL."
+                >Built full-stack projects integrating PHP and MySQL.</span
+              >
             </li>
             <li>
-              <i class="fa-solid fa-check"></i> Strong foundation in version
-              control with Git and GitHub.
+              <i class="fa-solid fa-check"></i>
+              <span
+                data-en="Worked on dynamic front-end interfaces using React and API integrations."
+                data-pt="Trabalhei em interfaces front-end dinâmicas usando React e integrações de API."
+                >Worked on dynamic front-end interfaces using React and API
+                integrations.</span
+              >
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span
+                data-en="Strong foundation in version control with Git and GitHub."
+                data-pt="Sólida base em controle de versão com Git e GitHub."
+                >Strong foundation in version control with Git and GitHub.</span
+              >
             </li>
           </ul>
+
+          <!-- CV Buttons - replace cv/Larsen_Nehemia_CV.pdf with your actual file path -->
           <div class="cv-buttons">
-            <a href="#" target="_blank" class="btn"
-              ><i class="fa-solid fa-eye"></i> View CV</a
+            <a href="cv/Larsen_Nehemia_CV.pdf" target="_blank" class="btn">
+              <i class="fa-solid fa-eye"></i>
+              <span data-en="View CV" data-pt="Ver CV">View CV</span>
+            </a>
+            <a
+              href="cv/Larsen_Nehemia_CV.pdf"
+              download="Larsen_Nehemia_CV.pdf"
+              class="btn btn-outline"
             >
-            <a href="#" download class="btn btn-outline"
-              ><i class="fa-solid fa-download"></i> Download CV</a
-            >
+              <i class="fa-solid fa-download"></i>
+              <span data-en="Download CV" data-pt="Baixar CV">Download CV</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- ===== SKILLS ===== -->
     <section class="skills" id="skills">
       <div class="skills-inner">
-        <span class="section-label">What I Know</span>
-        <h2>Technical Proficiency</h2>
+        <span class="section-label" data-en="What I Know" data-pt="O Que Sei"
+          >What I Know</span
+        >
+        <h2 data-en="Technical Proficiency" data-pt="Proficiência Técnica">
+          Technical Proficiency
+        </h2>
         <div class="skills-bars">
           <div class="skill">
             <div class="skill-info">
-              <span class="skill-name"><i class="fab fa-html5"></i> HTML</span
-              ><span class="skill-pct">95%</span>
+              <span class="skill-name"><i class="fab fa-html5"></i> HTML</span>
+              <span class="skill-pct">95%</span>
             </div>
             <div class="progress-bar">
               <div class="progress" data-skill="95"></div>
             </div>
           </div>
+
           <div class="skill">
             <div class="skill-info">
-              <span class="skill-name"><i class="fab fa-css3-alt"></i> CSS</span
-              ><span class="skill-pct">90%</span>
+              <span class="skill-name"
+                ><i class="fab fa-css3-alt"></i> CSS</span
+              >
+              <span class="skill-pct">90%</span>
             </div>
             <div class="progress-bar">
               <div class="progress" data-skill="90"></div>
             </div>
           </div>
+
           <div class="skill">
             <div class="skill-info">
               <span class="skill-name"
                 ><i class="fab fa-js"></i> JavaScript</span
-              ><span class="skill-pct">80%</span>
+              >
+              <span class="skill-pct">80%</span>
             </div>
             <div class="progress-bar">
               <div class="progress" data-skill="80"></div>
             </div>
           </div>
+
           <div class="skill">
             <div class="skill-info">
-              <span class="skill-name"><i class="fab fa-react"></i> React</span
-              ><span class="skill-pct">80%</span>
+              <span class="skill-name"><i class="fab fa-react"></i> React</span>
+              <span class="skill-pct">60%</span>
             </div>
             <div class="progress-bar">
-              <div class="progress" data-skill="80"></div>
+              <div class="progress" data-skill="60"></div>
             </div>
           </div>
+
           <div class="skill">
             <div class="skill-info">
               <span class="skill-name"
                 ><i class="fa-brands fa-java"></i> Java</span
-              ><span class="skill-pct">65%</span>
+              >
+              <span class="skill-pct">65%</span>
             </div>
             <div class="progress-bar">
               <div class="progress" data-skill="65"></div>
             </div>
           </div>
+
           <div class="skill">
             <div class="skill-info">
-              <span class="skill-name"><i class="fab fa-git-alt"></i> Git</span
-              ><span class="skill-pct">75%</span>
+              <span class="skill-name"
+                ><i class="fa-solid fa-database"></i> MySQL</span
+              >
+              <span class="skill-pct">70%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-skill="70"></div>
+            </div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-info">
+              <span class="skill-name"
+                ><i class="fa-solid fa-code"></i> C#</span
+              >
+              <span class="skill-pct">55%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-skill="55"></div>
+            </div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-info">
+              <span class="skill-name"><i class="fab fa-git-alt"></i> Git</span>
+              <span class="skill-pct">75%</span>
             </div>
             <div class="progress-bar">
               <div class="progress" data-skill="75"></div>
@@ -199,33 +425,48 @@
       </div>
     </section>
 
-    <!-- WHAT I DO -->
+    <!-- ===== WHAT I DO ===== -->
     <section class="what-i-do" id="services">
-      <span class="section-label">What I Offer</span>
-      <h2>What I Do</h2>
+      <span class="section-label" data-en="What I Offer" data-pt="O Que Ofereço"
+        >What I Offer</span
+      >
+      <h2 data-en="What I Do" data-pt="O Que Faço">What I Do</h2>
       <div class="services-container">
         <div class="service-card">
           <i class="fa-solid fa-lightbulb"></i>
-          <h3>Creativity</h3>
-          <p>
+          <h3 data-en="Creativity" data-pt="Criatividade">Creativity</h3>
+          <p
+            data-en="I design engaging and intuitive user experiences that are visually appealing and easy to navigate. My goal is to ensure users enjoy interacting with every product I build."
+            data-pt="Projeto experiências de usuário envolventes e intuitivas, visualmente atraentes e fáceis de navegar. Meu objetivo é garantir que os usuários desfrutem de cada produto que construo."
+          >
             I design engaging and intuitive user experiences that are visually
             appealing and easy to navigate. My goal is to ensure users enjoy
             interacting with every product I build.
           </p>
         </div>
+
         <div class="service-card">
           <i class="fa-solid fa-code"></i>
-          <h3>Development</h3>
-          <p>
+          <h3 data-en="Development" data-pt="Desenvolvimento">Development</h3>
+          <p
+            data-en="I develop responsive web applications, websites, and web pages using modern technologies. From concept to deployment, I build solutions tailored to client needs."
+            data-pt="Desenvolvo aplicações web responsivas, websites e páginas usando tecnologias modernas. Do conceito ao deploy, construo soluções personalizadas para cada cliente."
+          >
             I develop responsive web applications, websites, and web pages using
             modern technologies. From concept to deployment, I build solutions
             tailored to client needs.
           </p>
         </div>
+
         <div class="service-card">
           <i class="fa-solid fa-gears"></i>
-          <h3>Problem Solving</h3>
-          <p>
+          <h3 data-en="Problem Solving" data-pt="Resolução de Problemas">
+            Problem Solving
+          </h3>
+          <p
+            data-en="I analyze client requirements and future challenges to deliver reliable, scalable solutions. My focus is on solving real problems and improving business outcomes."
+            data-pt="Analiso os requisitos dos clientes e desafios futuros para entregar soluções confiáveis e escaláveis. Meu foco é resolver problemas reais e melhorar os resultados do negócio."
+          >
             I analyze client requirements and future challenges to deliver
             reliable, scalable solutions. My focus is on solving real problems
             and improving business outcomes.
@@ -234,18 +475,24 @@
       </div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- ===== PROJECTS ===== -->
     <section class="projects" id="projects">
-      <span class="section-label">My Work</span>
-      <h2>Projects I've Worked On</h2>
+      <span class="section-label" data-en="My Work" data-pt="Meu Trabalho"
+        >My Work</span
+      >
+      <h2 data-en="Projects I've Worked On" data-pt="Projetos em que Trabalhei">
+        Projects I've Worked On
+      </h2>
       <div class="project-grid">
         <div
           class="project-card"
           data-title="Engen 1 Stop"
+          data-title-pt="Engen 1 Stop"
           data-desc="I built a fully responsive website for the Engen 1 Stop petrol station located in Mozambique, Maotla. The site showcases their services, fuel options, and contact details — giving the business a professional digital presence to reach more customers online."
-          data-tech="Typescript, React"
+          data-desc-pt="Construí um website totalmente responsivo para o posto de combustível Engen 1 Stop localizado em Moçambique, Maotla. O site apresenta seus serviços, opções de combustível e detalhes de contato."
+          data-tech="HTML, CSS, JavaScript"
           data-image="img/Engen1Stop.png"
-          data-url="https://engen-1-stop.vercel.app/"
+          data-url="#"
         >
           <img
             src="img/Engen1Stop.png"
@@ -253,14 +500,21 @@
             class="project-display"
           />
           <div class="project-overlay">
-            <span><i class="fa-solid fa-eye"></i> View Project</span>
+            <span
+              ><i class="fa-solid fa-eye"></i>
+              <span data-en="View Project" data-pt="Ver Projeto"
+                >View Project</span
+              ></span
+            >
           </div>
         </div>
 
         <div
           class="project-card"
           data-title="InziecitGroup, Ida"
+          data-title-pt="InziecitGroup, Ida"
           data-desc="A professional business website built for InziecitGroup, Ida. The site highlights their services, company values, and provides a clear point of contact for potential clients seeking their expertise."
+          data-desc-pt="Um website profissional construído para a InziecitGroup, Ida. O site destaca seus serviços, valores da empresa e oferece um ponto de contato claro para potenciais clientes."
           data-tech="HTML, CSS, JavaScript"
           data-image=""
           data-url="#"
@@ -270,40 +524,66 @@
             <p>InziecitGroup, Ida</p>
           </div>
           <div class="project-overlay">
-            <span><i class="fa-solid fa-eye"></i> View Project</span>
+            <span
+              ><i class="fa-solid fa-eye"></i>
+              <span data-en="View Project" data-pt="Ver Projeto"
+                >View Project</span
+              ></span
+            >
           </div>
         </div>
 
         <div
           class="project-card"
-          data-title="Project 3"
+          data-title="Coming Soon"
+          data-title-pt="Em Breve"
           data-desc="Description coming soon. This project is currently in development. Check back later for more details about what's being built."
+          data-desc-pt="Descrição em breve. Este projeto está em desenvolvimento. Volte mais tarde para mais detalhes sobre o que está sendo construído."
           data-tech="HTML, CSS, JavaScript"
           data-image=""
           data-url="#"
         >
           <div class="project-placeholder">
             <i class="fa-solid fa-laptop-code"></i>
-            <p>Coming Soon</p>
+            <p data-en="Coming Soon" data-pt="Em Breve">Coming Soon</p>
           </div>
           <div class="project-overlay">
-            <span><i class="fa-solid fa-eye"></i> View Project</span>
+            <span
+              ><i class="fa-solid fa-eye"></i>
+              <span data-en="View Project" data-pt="Ver Projeto"
+                >View Project</span
+              ></span
+            >
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT CTA (after projects) -->
+    <!-- ===== CONTACT CTA ===== -->
     <section class="contact-cta" id="contact">
       <div class="contact-cta-inner">
-        <span class="section-label">Let's Talk</span>
-        <h2>Have a Project in Mind?</h2>
-        <p>
+        <span
+          class="section-label"
+          data-en="Let's Talk"
+          data-pt="Vamos Conversar"
+          >Let's Talk</span
+        >
+        <h2
+          data-en="Have a Project in Mind?"
+          data-pt="Tem um Projeto em Mente?"
+        >
+          Have a Project in Mind?
+        </h2>
+        <p
+          data-en="I'm available for freelance work. Let's build something great together."
+          data-pt="Estou disponível para trabalhos freelance. Vamos construir algo incrível juntos."
+        >
           I'm available for freelance work. Let's build something great
           together.
         </p>
         <button class="btn btn-lg" id="contactBtn">
-          <i class="fa-solid fa-paper-plane"></i> Contact Me
+          <i class="fa-solid fa-paper-plane"></i>
+          <span data-en="Contact Me" data-pt="Fale Comigo">Contact Me</span>
         </button>
         <div class="social-icons">
           <a
@@ -330,10 +610,15 @@
 
     <!-- FOOTER -->
     <footer>
-      <p>&copy; 2026 Larsen Nehemia &mdash; Built with passion.</p>
+      <p>
+        &copy; 2025 Larsen Nehemia &mdash;
+        <span data-en="Built with passion." data-pt="Feito com paixão."
+          >Built with passion.</span
+        >
+      </p>
     </footer>
 
-    <!-- PROJECT DETAIL MODAL -->
+    <!-- PROJECT MODAL -->
     <div id="projectModal" class="modal">
       <div class="modal-content project-modal-content">
         <button class="close" id="projectClose">&times;</button>
@@ -341,47 +626,83 @@
       </div>
     </div>
 
-    <!-- CONTACT FORM MODAL -->
+    <!-- CONTACT MODAL -->
     <div id="contactModal" class="modal">
       <div class="modal-content">
         <button class="close" id="contactClose">&times;</button>
-        <h2><i class="fa-solid fa-paper-plane"></i> Contact Me</h2>
+        <h2>
+          <i class="fa-solid fa-paper-plane"></i>
+          <span data-en="Contact Me" data-pt="Fale Comigo">Contact Me</span>
+        </h2>
         <form
           id="contactForm"
           action="https://formspree.io/f/mldwvzjl"
           method="POST"
         >
-          <label for="fullName">Name &amp; Surname:</label>
+          <label
+            for="fullName"
+            data-en="Name &amp; Surname:"
+            data-pt="Nome &amp; Apelido:"
+            >Name &amp; Surname:</label
+          >
           <input
             type="text"
             id="fullName"
             name="fullName"
+            data-en-placeholder="Enter your name and surname"
+            data-pt-placeholder="Digite seu nome e apelido"
             placeholder="Enter your name and surname"
             required
           />
-          <label for="email">Email Address:</label>
+          <label
+            for="email"
+            data-en="Email Address:"
+            data-pt="Endereço de Email:"
+            >Email Address:</label
+          >
           <input
             type="email"
             id="email"
             name="email"
+            data-en-placeholder="Enter your email address"
+            data-pt-placeholder="Digite seu endereço de email"
             placeholder="Enter your email address"
             required
           />
-          <label for="phone">Phone Number (Optional):</label>
+          <label
+            for="phone"
+            data-en="Phone Number (Optional):"
+            data-pt="Número de Telefone (Opcional):"
+            >Phone Number (Optional):</label
+          >
           <input
             type="tel"
             id="phone"
             name="phone"
+            data-en-placeholder="Enter your phone number"
+            data-pt-placeholder="Digite seu número de telefone"
             placeholder="Enter your phone number"
           />
-          <label for="query">Your Query:</label>
+          <label for="query" data-en="Your Query:" data-pt="Sua Mensagem:"
+            >Your Query:</label
+          >
           <textarea
             id="query"
             name="query"
+            data-en-placeholder="Type your message here..."
+            data-pt-placeholder="Digite sua mensagem aqui..."
             placeholder="Type your message here..."
             required
           ></textarea>
-          <button type="submit" class="btn" id="sendButton">Send</button>
+          <button
+            type="submit"
+            class="btn"
+            id="sendButton"
+            data-en="Send"
+            data-pt="Enviar"
+          >
+            Send
+          </button>
         </form>
         <div id="formStatus" class="form-status"></div>
       </div>
@@ -390,7 +711,6 @@
     <button id="topBtn" aria-label="Back to top">
       <i class="fa-solid fa-arrow-up"></i>
     </button>
-
     <script src="script.js"></script>
   </body>
 </html>
