@@ -1,4 +1,71 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // ===== THEME TOGGLE =====
+  const html = document.documentElement;
+  const themeToggle = document.getElementById("themeToggle");
+  const saved = localStorage.getItem("theme") || "dark";
+  html.setAttribute("data-theme", saved);
+
+  themeToggle.addEventListener("click", () => {
+    const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    html.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+
+  // ===== LANGUAGE TOGGLE =====
+  let currentLang = localStorage.getItem("lang") || "en";
+  const langToggle = document.getElementById("langToggle");
+  const langLabel = document.getElementById("langLabel");
+
+  function applyLanguage(lang) {
+    // text nodes
+    document.querySelectorAll("[data-en]").forEach((el) => {
+      if (!el.matches("input, textarea, button[type=submit]")) {
+        el.textContent = lang === "en" ? el.dataset.en : el.dataset.pt;
+      }
+    });
+    // placeholders
+    document.querySelectorAll("[data-en-placeholder]").forEach((el) => {
+      el.placeholder =
+        lang === "en" ? el.dataset.enPlaceholder : el.dataset.ptPlaceholder;
+    });
+    // html lang attr
+    document.documentElement.lang = lang === "en" ? "en" : "pt";
+    // button label shows what you'll switch TO
+    langLabel.textContent = lang === "en" ? "PT" : "EN";
+    currentLang = lang;
+    localStorage.setItem("lang", lang);
+  }
+
+  applyLanguage(currentLang);
+
+  langToggle.addEventListener("click", () => {
+    applyLanguage(currentLang === "en" ? "pt" : "en");
+  });
+
+  // ===== HAMBURGER MENU =====
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  hamburger.addEventListener("click", () => {
+    const open = mobileMenu.classList.toggle("open");
+    hamburger.classList.toggle("open", open);
+    hamburger.setAttribute("aria-expanded", open);
+    document.body.style.overflow = open ? "hidden" : "";
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll(".mob-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      mobileMenu.classList.remove("open");
+      hamburger.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", false);
+      document.body.style.overflow = "";
+      const target = document.querySelector(link.getAttribute("href"));
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
   // ===== NAVBAR SCROLL EFFECT =====
   const navbar = document.querySelector(".navbar");
   window.addEventListener("scroll", () => {
@@ -16,9 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const id = entry.target.getAttribute("id");
           navLinks.forEach((link) => {
             link.classList.remove("active");
-            if (link.getAttribute("href") === `#${id}`) {
+            if (link.getAttribute("href") === `#${id}`)
               link.classList.add("active");
-            }
           });
         }
       });
@@ -27,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   sections.forEach((sec) => sectionObserver.observe(sec));
 
-  // ===== SMOOTH SCROLL NAV LINKS =====
+  // Smooth scroll desktop nav
   navLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
       e.preventDefault();
@@ -36,89 +102,83 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ===== ARROW BUTTON: scroll to About =====
+  // ===== ARROW BUTTON =====
   const arrowBtn = document.getElementById("arrowBtn");
   if (arrowBtn) {
     arrowBtn.addEventListener("click", () => {
-      const aboutSection = document.getElementById("about");
-      if (aboutSection) aboutSection.scrollIntoView({ behavior: "smooth" });
+      document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
     });
   }
 
-  // ===== HERO BACKGROUND SLIDESHOW =====
+  // ===== HERO SLIDESHOW =====
   const slides = document.querySelectorAll(".slide");
   let currentSlide = 0;
-  function nextSlide() {
-    slides[currentSlide].classList.remove("active");
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add("active");
+  if (slides.length > 1) {
+    setInterval(() => {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }, 5000);
   }
-  if (slides.length > 1) setInterval(nextSlide, 5000);
 
   // ===== TYPING ANIMATION =====
-  const texts = [
-    "Frontend Developer",
-    "Web Developer",
-    "UI Enthusiast",
-    "Problem Solver",
-  ];
+  const typingTexts = {
+    en: [
+      "Frontend Developer",
+      "Web Developer",
+      "UI Enthusiast",
+      "Problem Solver",
+    ],
+    pt: [
+      "Desenvolvedor Frontend",
+      "Desenvolvedor Web",
+      "Entusiasta de UI",
+      "Solucionador de Problemas",
+    ],
+  };
   let ti = 0,
     tj = 0,
-    isDeleting = false,
-    currentText = "";
+    isDeleting = false;
 
   function typeEffect() {
     const el = document.getElementById("typing");
     if (!el) return;
-    if (!isDeleting && tj <= texts[ti].length) {
-      currentText = texts[ti].substring(0, tj++);
+    const list = typingTexts[currentLang] || typingTexts.en;
+    // reset index if out of range
+    if (ti >= list.length) ti = 0;
+    const word = list[ti];
+    if (!isDeleting && tj <= word.length) {
+      el.textContent = word.substring(0, tj++);
     } else if (isDeleting && tj >= 0) {
-      currentText = texts[ti].substring(0, tj--);
+      el.textContent = word.substring(0, tj--);
     }
-    el.textContent = currentText;
-    if (tj === texts[ti].length) isDeleting = true;
+    if (tj === word.length) isDeleting = true;
     if (tj === 0 && isDeleting) {
       isDeleting = false;
-      ti = (ti + 1) % texts.length;
+      ti = (ti + 1) % list.length;
     }
     setTimeout(typeEffect, isDeleting ? 55 : 110);
   }
   typeEffect();
 
-  // ===== ABOUT SECTION REVEAL =====
-  const aboutImage = document.querySelector(".about-image");
-  const aboutText = document.querySelector(".about-text");
-  const aboutObserver = new IntersectionObserver(
+  // ===== ABOUT REVEAL =====
+  const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("reveal");
-          aboutObserver.unobserve(entry.target);
+          revealObserver.unobserve(entry.target);
         }
       });
     },
     { threshold: 0.25 },
   );
-  if (aboutImage) aboutObserver.observe(aboutImage);
-  if (aboutText) aboutObserver.observe(aboutText);
 
-  // ===== PROJECT CARD REVEAL =====
-  const projectCards = document.querySelectorAll(".project-card");
-  const cardObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("reveal");
-          cardObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.3 },
-  );
-  projectCards.forEach((card) => cardObserver.observe(card));
+  document
+    .querySelectorAll(".about-image, .about-text")
+    .forEach((el) => revealObserver.observe(el));
 
-  // ===== SERVICE CARD REVEAL =====
-  const serviceCards = document.querySelectorAll(".service-card");
+  // ===== SERVICE CARDS REVEAL =====
   const serviceObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry, i) => {
@@ -130,44 +190,69 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     { threshold: 0.25 },
   );
-  serviceCards.forEach((card) => serviceObserver.observe(card));
+  document
+    .querySelectorAll(".service-card")
+    .forEach((c) => serviceObserver.observe(c));
 
-  // ===== PROGRESS BAR ANIMATION =====
-  const progressBars = document.querySelectorAll(".progress");
+  // ===== PROJECT CARDS REVEAL =====
+  const cardObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal");
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.25 },
+  );
+  document
+    .querySelectorAll(".project-card")
+    .forEach((c) => cardObserver.observe(c));
+
+  // ===== SKILL BARS =====
   const progressObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const bar = entry.target;
-          bar.style.width = bar.getAttribute("data-skill") + "%";
-          progressObserver.unobserve(bar);
+          entry.target.style.width = entry.target.dataset.skill + "%";
+          progressObserver.unobserve(entry.target);
         }
       });
     },
     { threshold: 0.5 },
   );
-  progressBars.forEach((bar) => progressObserver.observe(bar));
+  document
+    .querySelectorAll(".progress")
+    .forEach((bar) => progressObserver.observe(bar));
 
   // ===== PROJECT DETAIL MODAL =====
   const projectModal = document.getElementById("projectModal");
   const projectModalBody = document.getElementById("projectModalBody");
   const projectClose = document.getElementById("projectClose");
 
-  projectCards.forEach((card) => {
+  document.querySelectorAll(".project-card").forEach((card) => {
     card.addEventListener("click", () => {
-      const title = card.dataset.title || "Project";
-      const desc = card.dataset.desc || "";
+      const lang = currentLang;
+      const title =
+        lang === "pt"
+          ? card.dataset.titlePt || card.dataset.title
+          : card.dataset.title;
+      const desc =
+        lang === "pt"
+          ? card.dataset.descPt || card.dataset.desc
+          : card.dataset.desc;
       const techStr = card.dataset.tech || "";
       const image = card.dataset.image || "";
       const url = card.dataset.url || "#";
+      const visitLabel = lang === "pt" ? "Visitar Site" : "Visit Site";
 
       const techTags = techStr
         .split(",")
         .map((t) => `<span class="tech-tag">${t.trim()}</span>`)
         .join("");
-
       const imgHTML = image
-        ? `<img src="${image}" alt="${title}" class="modal-screenshot" />`
+        ? `<img src="${image}" alt="${title}" class="modal-screenshot"/>`
         : `<div class="modal-screenshot-placeholder"><i class="fa-solid fa-image"></i></div>`;
 
       projectModalBody.innerHTML = `
@@ -177,22 +262,19 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${desc}</p>
           <div class="modal-tech">${techTags}</div>
           <a href="${url}" target="_blank" class="btn">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Site
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> ${visitLabel}
           </a>
-        </div>
-      `;
+        </div>`;
 
       projectModal.style.display = "flex";
       document.body.style.overflow = "hidden";
     });
   });
 
-  if (projectClose) {
-    projectClose.addEventListener("click", () => {
-      projectModal.style.display = "none";
-      document.body.style.overflow = "";
-    });
-  }
+  projectClose?.addEventListener("click", () => {
+    projectModal.style.display = "none";
+    document.body.style.overflow = "";
+  });
   projectModal.addEventListener("click", (e) => {
     if (e.target === projectModal) {
       projectModal.style.display = "none";
@@ -202,21 +284,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== CONTACT MODAL =====
   const contactModal = document.getElementById("contactModal");
-  const contactBtn = document.getElementById("contactBtn");
   const contactClose = document.getElementById("contactClose");
 
-  if (contactBtn) {
-    contactBtn.addEventListener("click", () => {
-      contactModal.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    });
-  }
-  if (contactClose) {
-    contactClose.addEventListener("click", () => {
-      contactModal.style.display = "none";
-      document.body.style.overflow = "";
-    });
-  }
+  document.getElementById("contactBtn")?.addEventListener("click", () => {
+    contactModal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  });
+  contactClose?.addEventListener("click", () => {
+    contactModal.style.display = "none";
+    document.body.style.overflow = "";
+  });
   contactModal.addEventListener("click", (e) => {
     if (e.target === contactModal) {
       contactModal.style.display = "none";
@@ -224,36 +301,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ===== SCROLL PROGRESS BAR =====
-  const scrollBar = document.getElementById("scrollBar");
-  window.addEventListener("scroll", () => {
-    if (!scrollBar) return;
-    const scrollTop = document.documentElement.scrollTop;
-    const scrollHeight =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
-    scrollBar.style.width = (scrollTop / scrollHeight) * 100 + "%";
-  });
-
-  // ===== SCROLL TO TOP =====
-  const topBtn = document.getElementById("topBtn");
-  window.addEventListener("scroll", () => {
-    topBtn.style.display = window.scrollY > 400 ? "block" : "none";
-  });
-  topBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  // ===== CONTACT FORM (Formspree) =====
+  // ===== CONTACT FORM =====
   const form = document.getElementById("contactForm");
   const status = document.getElementById("formStatus");
   const sendButton = document.getElementById("sendButton");
 
   if (form) {
-    form.addEventListener("submit", async function (e) {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       sendButton.disabled = true;
-      sendButton.textContent = "Sending...";
+      sendButton.textContent =
+        currentLang === "pt" ? "Enviando..." : "Sending...";
       try {
         const res = await fetch(form.action, {
           method: form.method,
@@ -261,26 +319,53 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: { Accept: "application/json" },
         });
         if (res.ok) {
-          status.textContent = "Thank you! Your message has been sent.";
+          status.textContent =
+            currentLang === "pt"
+              ? "Obrigado! Mensagem enviada."
+              : "Thank you! Your message has been sent.";
           status.style.color = "#00c15a";
-          sendButton.textContent = "Sent ✔";
+          sendButton.textContent = "✔";
           form.reset();
           setTimeout(() => {
-            sendButton.textContent = "Send";
+            sendButton.textContent = currentLang === "pt" ? "Enviar" : "Send";
             sendButton.disabled = false;
           }, 3000);
         } else {
-          status.textContent = "Something went wrong. Please try again.";
+          status.textContent =
+            currentLang === "pt"
+              ? "Algo correu mal. Tente novamente."
+              : "Something went wrong. Please try again.";
           status.style.color = "#e55";
-          sendButton.textContent = "Send";
+          sendButton.textContent = currentLang === "pt" ? "Enviar" : "Send";
           sendButton.disabled = false;
         }
       } catch {
-        status.textContent = "Network error. Check your connection.";
+        status.textContent =
+          currentLang === "pt" ? "Erro de rede." : "Network error.";
         status.style.color = "#e55";
-        sendButton.textContent = "Send";
+        sendButton.textContent = currentLang === "pt" ? "Enviar" : "Send";
         sendButton.disabled = false;
       }
     });
   }
+
+  // ===== SCROLL PROGRESS BAR =====
+  const scrollBar = document.getElementById("scrollBar");
+  window.addEventListener("scroll", () => {
+    if (!scrollBar) return;
+    const pct =
+      document.documentElement.scrollTop /
+      (document.documentElement.scrollHeight -
+        document.documentElement.clientHeight);
+    scrollBar.style.width = pct * 100 + "%";
+  });
+
+  // ===== SCROLL TO TOP =====
+  const topBtn = document.getElementById("topBtn");
+  window.addEventListener("scroll", () => {
+    topBtn.style.display = window.scrollY > 400 ? "block" : "none";
+  });
+  topBtn?.addEventListener("click", () =>
+    window.scrollTo({ top: 0, behavior: "smooth" }),
+  );
 });
